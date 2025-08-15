@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.username }}'s Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">StrayHelp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url  'home' %}">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+              {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout_user' %}">Logout</a></li>
+{% else %}
+ <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'login_user' %}">Login</a></li>
+
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+
+    <!-- User Info Section -->
+    <div class="card mb-4 p-3">
+        <h3>User Profile</h3>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+       
+    </div>
+
+    <!-- Dashboard Section -->
+    <div class="card p-3">
+        <h3>Rescue Animals Dashboard</h3>
+        {% if r %}
+            <div class="row">
+                {% for a in r %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="{{ a.ani_post.image.url }}" class="card-img-top" alt="Animal Image">
+                            <div class="card-body">
+                               
+                                <p class="card-text"><strong>Status:</strong> {{ r.status }}</p>
+                                <p class="card-text"><strong>Location:</strong> {{ r.ani_post.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No rescued animals found.</p>
+        {% endif %}
+    </div>
+
+</div>
+</body>
+</html>
