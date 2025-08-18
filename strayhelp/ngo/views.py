@@ -7,7 +7,7 @@ from users.models import post
 
 def ngo_home(request):
     ngo = Ngo.objects.get(user=request.user)
-    ani_post = post.objects.filter(location__icontains=ngo.operational_area).exclude(is_rescue=True)
+    ani_post = post.objects.filter(operational_area__icontains=ngo.operational_area).exclude(is_rescue=True)
     return render(request,'ngo_home.html',{'animal_post':ani_post})
 
 def register_ngo(request):
