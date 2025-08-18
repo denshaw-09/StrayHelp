@@ -45,7 +45,7 @@
         {% for post in animal_post %}
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
-                <img src="{{ post.photo.url }}" class="card-img-top" alt="Animal Image">
+                <img src="{{ post.photo.url }}" class="card-img-top" alt="Animal Image" style="height:400px ;width:400px;">
                 <div class="card-body">
                     <p class="card-text"><strong>Location:</strong> {{ post.location }}</p>
                     <p class="card-text"><small class="text-muted">Reported on {{ post.created_at}}</small></p>

@@ -7,7 +7,7 @@ import google.generativeai as genai
 from django.contrib.auth import login,logout
 from django.core.files.storage import FileSystemStorage
 import os
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key="AIzaSyCIsP0kddo6wwBEvpgANSCar9OvOBEwCLg")
 model = genai.GenerativeModel("gemini-1.5-flash")  # or gemini-1.5-pro for better accuracy
 def is_animal_image(file_obj) -> bool:
     """Check if uploaded image contains an animal."""
