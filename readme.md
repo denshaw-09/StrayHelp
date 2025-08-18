@@ -13,7 +13,9 @@ Stray animals frequently suffer from injuries and neglect due to delayed rescues
 StrayHelp is a digital platform that connects citizens with NGOs to enable faster and more effective stray animal rescues. Users can report strays with images and location, while AI verifies the animal, assesses wound severity, and classifies breed. NGOs receive real-time alerts within their operational area, allowing them to take prompt action and update rescue status. By streamlining reporting, verification, and response, StrayHelp reduces delays and ensures timely care for stray animals.
 
 ---
+## Link of demo : https://drive.google.com/drive/folders/126hWz1A4kZSk_T_3pwBddV_K47pb0J-Q?usp=drive_link
 
+---
 ## Features & Workflows
 
 ### User Workflow
@@ -110,4 +112,9 @@ Value-Adds: Vet consults, adoption services, and sponsorship programs.
 1. Smita Bhoine : Backend Development
 2. Sweta Prasad : Backend Development
 3. Mrunali Sawant : Frontend Development
+---
+StrayHelp is a smart digital platform designed to transform the way stray animal rescues are managed. As a product, it empowers citizens to become active participants in animal welfare by enabling them to instantly report stray animals through photos and location details.
 
+Built-in AI capabilities verify the animal type, evaluate the severity of visible wounds, and identify the breed, ensuring NGOs receive accurate, real-time alerts within their operational zones. NGOs and rescue teams can then respond faster, update the rescue status, and coordinate care seamlessly.
+
+By integrating reporting, AI verification, and NGO response into one streamlined system, StrayHelp reduces delays, improves rescue efficiency, and ensures stray animals get the timely help they deserve.
