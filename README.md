@@ -1,7 +1,5 @@
 # StrayHelp 
 
----
-
 ## Problem Statement
 Stray animals frequently suffer from injuries and neglect due to delayed rescues and lack of coordination between citizens and NGOs. Although people often wish to help, they cannot always provide timely assistance. Currently, there is no efficient system that allows quick reporting, verification, and response to such cases. This gap leads to unnecessary suffering of animals that could otherwise be rescued.
 
@@ -109,6 +107,7 @@ Value-Adds: Vet consults, adoption services, and sponsorship programs.
 ## Team contribution
 
 Backend : Smita Bhoine
+
 Frontend: Shreya 
 
 ---
