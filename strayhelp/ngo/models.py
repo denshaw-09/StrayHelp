@@ -10,6 +10,7 @@ class Ngo(models.Model):
     address = models.TextField()
     operational_area = models.CharField(max_length=255)
     logo = models.ImageField(upload_to="ngo_logo/",blank=True,null=True)
+    description = models.TextField(default="")
 
     def __str__(self):
         return self.user.username 

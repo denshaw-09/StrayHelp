@@ -1,66 +1,82 @@
-<!-- ngo_dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>NGO Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NGO Dashboard - StrayHelp</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #006d5b !important;
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+  </style>
 </head>
 <body>
-    <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">StrayHelp</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                
-     
-               
-                {% if user.is_authenticated %}
-                   
-              <li class="nav-item"><a class="nav-link" href="{% url 'ngo_profile' %}">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">dashboard</a></li>
-                
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout_ngo' %}">Logout</a></li>
-               
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login_ngo' %}">Login</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container mt-4">
-    <h1 class="text-center mb-4">Rescue Operations</h1>
 
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>Image</th>
-                <th>Location</th>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-3">
+          <li class="nav-item"><a class="nav-link" href="{% url "ngo_home" %}">Home</a></li>
+         
+          <li class="nav-item"><a class="nav-link" href="{% url "about" %}">About</a></li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+            {% if request.user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url "ngo_profile" %}">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url "dashboard" %}">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url "logout_ngo" %}">Sign Out</a></li>
+{% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url "login_ngo" %}">Sign in</a></li>
+          <li class="nav-item"><a class="btn btn-success ms-2" href="{% url "register_ngo" %}">Sign up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    
+    
+  </nav>
+
+  <!-- Dashboard Heading -->
+  <div class="container mt-4">
+    <h2 class="fw-bold text-success">NGO Dashboard</h2>
+    <p class="text-muted">View all rescued animals and their details</p>
+  </div>
+
+  <!-- Rescued Animals Grid -->
+  <div class="container mt-4">
+    <div class="row g-4">
+     {% for r in rescues  %}
+      <!-- Example Rescue Card -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src= {{ r.ani_post.photo.url }}  class="card-img-top" alt="Animal">
+          <div class="card-body">
            
-                <th>Reported By</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for r in rescues %}
-            <tr>
-                <td><img src="{{r.ani_post.photo.url}}" alt="Animal" width="100"></td>
-                <td>{{r.ani_post.location}}</td>
-                <td>{{r.ani_post.user.username}}</td>
-                <td><span class="badge bg-success">{{r.status}}</span></td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5" class="text-center">No rescue operations yet.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+            <p><strong>📍 Location:</strong> {{r.ani_post.location}}</p>
+            <p><strong>⏰ Time:</strong> {{r.ani_post.created_at}}</p>
+          </div>
+        </div>
+      </div>
+
+{% endfor %}
+      
+
+    </div>
+  </div>
+
 </body>
 </html>

@@ -1,71 +1,72 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Image & Location</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Rescue - StrayHelp</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
+
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">StrayHelp</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url  'home' %}">Home</a></li>
-
-                <li class="nav-item"><a class="nav-link" href="{% url  'home' %}">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
-              {% if user.is_authenticated %}
-
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout_user' %}">Logout</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'profile_user' %}">Profile</a></li>
-
-                {% else %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'login_user' %}">Login</a></li>
-
-                {% endif %}
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-success" href="{% url "home" %}">StrayHelp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Rescues</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+      </ul>
+     
+      <div>
+         {% if request.user.is_authenticated %}
+        <a href="{% url 'logout_user' %}" class="btn btn-outline-success me-2">Sign out</a>
+      
+     {% else %}
+        <a href="{% url 'login_user' %}" class="btn btn-outline-success me-2">Sign in</a>
+        <a href="{% url 'register' %}" class="btn btn-success">Sign up</a>
+         {% endif %}
+      </div>
     </div>
+  </div>
 </nav>
 
-    <div class="container mt-5">
-        <div class="card shadow p-4">
-            <h3 class="text-center mb-4">Upload Image & Location</h3>
-            <form action="{% url "upload_image" %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <!-- Image Upload -->
-                <div class="mb-3">
-                    <label for="image" class="form-label">Upload Image</label>
-                    <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
-                </div>
-
-                <!-- Location Input -->
-                <div class="mb-3">
-                    <label for="location" class="form-label">Enter Location</label>
-                    <input type="text" class="form-control" id="location" placeholder="Enter location" name="location" required>
-                </div>
-                <div class="mb-3">
-                    <label for="location" class="form-label">Enter Operational area</label>
-                    <input type="text" class="form-control" id="location" placeholder="Enter operational area" name="op" required>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+<!-- Create Rescue Form -->
+<section class="d-flex align-items-center justify-content-center" style="min-height: 90vh;">
+  <div class="col-md-6">
+    <div class="card shadow-sm p-4">
+      <h4 class="fw-bold mb-4">Create New Rescue</h4>
+      <form action="{% url 'upload_image' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          <label for="description" class="form-label">Operational Area</label>
+          <input typ class="form-control" id="description" name="oa"  placeholder="operation area" required/>
         </div>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" class="form-control" id="location" name="location" placeholder="Enter location" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="photo" class="form-label">Photo</label>
+          <input class="form-control" type="file" id="photo" name="image" accept="image/*">
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <a href="{% url 'home' %}" class="btn btn-outline-secondary me-2">Cancel</a>
+          <button type="submit" class="btn btn-success">Create Rescue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
