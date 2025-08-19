@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">StrayHelp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'ngo_home' %}">Home</a></li>
+                
+
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'ngo_profile' %}">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout_ngo' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login_ngo' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- NGO Profile -->
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="row g-0">
+            <!-- Logo -->
+            <div class="col-md-4 text-center p-4">
+                {% if ngo.logo %}
+                    <img src="{{ ngo.logo.url }}" alt="NGO Logo" class="img-fluid rounded-circle" style="max-height: 200px;">
+                {% else %}
+                    <img src="https://via.placeholder.com/200" alt="No Logo" class="img-fluid rounded-circle">
+                {% endif %}
+            </div>
+            <!-- Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">{{ ngo.user.username }}</h3>
+                    <p><strong>Registration No:</strong> {{ ngo.registration_number }}</p>
+                    <p><strong>Year Founded:</strong> {{ ngo.year }}</p>
+                    <p><strong>Phone:</strong> {{ ngo.phone }}</p>
+                    <p><strong>Address:</strong> {{ ngo.address }}</p>
+                    <p><strong>Operational Area:</strong> {{ ngo.operational_area }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
