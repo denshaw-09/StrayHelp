@@ -1,64 +1,111 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StrayHelp - NGO Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StrayHelp - Home</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8fafc;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #16a34a !important;
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .footer {
+      margin-top: 50px;
+      padding: 20px;
+      background: #f1f5f9;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#">StrayHelp</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-     
-                
+      <a class="navbar-brand" href="{% url "ngo_home" %}">StrayHelp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#navbarNav" aria-controls="navbarNav" 
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href={% url "ngo_home" %}>Home</a></li>
+         
+        </ul>
+        <div class="ms-3">
+            {% if request.user.is_authenticated %}
+          <a href={% url "dashboard" %} class="btn btn-outline-success btn-sm">Dashboard</a>
+          <a href={% url "ngo_profile" %} class="btn btn-outline-success btn-sm">Profile</a>
 
-                {% if user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link" href="{% url 'ngo_profile' %}">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">dashboard</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout_ngo' %}">Logout</a></li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login_ngo' %}">Login</a></li>
-                {% endif %}
-            </ul>
+          <a href={% url "logout_ngo" %} class="btn btn-outline-success btn-sm">Sign Out</a>
+            {% else %}
+           
+          <a href="{% url "login_ngo" %}" class="btn btn-outline-success btn-sm">Sign in</a>
+          <a href="{% url "register_ngo" %}" class="btn btn-success btn-sm">Sign up</a>
+           {% endif %}
         </div>
+      </div>
     </div>
-</nav>
+  </nav>
 
-<!-- Page Heading -->
-<div class="container my-4">
-    <h2 class="text-center">Animal Reports in Your Operational Area</h2>
-</div>
+  <!-- Hero Section -->
+  <section class="py-5 text-center">
+    <div class="container">
+      <h1 class="fw-bold">Welcome to StrayHelp</h1>
+      <p class="lead">Together, let’s save lives of stray animals by reporting and rescuing them.</p>
+    
+    </div>
+  </section>
 
-<!-- Animal Posts -->
-<div class="container">
-    <div class="row">
-        {% for post in animal_post %}
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <img src="{{ post.photo.url }}" class="card-img-top" alt="Animal Image">
-                <div class="card-body">
-                    <p class="card-text"><strong>Location:</strong> {{ post.location }}</p>
-                    <p class="card-text"><small class="text-muted">Reported on {{ post.created_at}}</small></p>
-                    <a href="{% url "detailed_view" post.id %}" class="btn btn-primary btn-sm">View Details</a>
-                </div>
+  <!-- Rescue Cases Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="fw-bold mb-3">Rescue Cases</h2>
+      <p class="text-muted">List of all reported stray animal rescue cases</p>
+    
+      <div class="row g-4">   
+        {% for p in animal_post %}
+        <!-- Card 1 -->
+        <div class="col-md-4">
+          <div class="card shadow-sm border-0">
+            <img src="{{ p.photo.url }}" class="card-img-top" alt="Puppy">
+            <div class="card-body">
+             
+              <p class="card-text">Add: {{ p.location }}</p>
+              <p class="text-muted small">{{ p.created_at }} | Posted by: {{ p.user.username }}</p>
+              <span class="badge bg-warning text-dark status-badge">PENDING</span>
+               <div class="text-center mt-4">
+                <a href="{% url "rescue_animal"  p.id %}" class="btn btn-success btn-lg">Rescue</a>
             </div>
+            </div>
+          </div>
         </div>
-        {% empty %}
-        <p class="text-center">No animal reports found in your area.</p>
-        {% endfor %}
-    </div>
-</div>
+      
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      </div>
+{% endfor %}
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

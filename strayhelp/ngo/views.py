@@ -7,7 +7,8 @@ from users.models import post
 
 def ngo_home(request):
     ngo = Ngo.objects.get(user=request.user)
-    ani_post = post.objects.filter(location__icontains=ngo.operational_area).exclude(is_rescue=True)
+    ani_post = post.objects.filter(operational_area__icontains=ngo.operational_area).exclude(is_rescue=True)
+    
     return render(request,'ngo_home.html',{'animal_post':ani_post})
 
 def register_ngo(request):
@@ -17,15 +18,16 @@ def register_ngo(request):
         email = request.POST.get("email")
         user = User(username=username,password=password,email=email)
         user.save()
+        desc=request.POST.get("desc")
         logo = request.FILES.get("logo")
         registration_number = request.POST.get("registration_number")
         year = request.POST.get("year")
         address = request.POST.get("address")
         phone = request.POST.get("phone")
         operational_area = request.POST.get("oa")
-        ngo_user = Ngo(user=user,logo=logo,registration_number=registration_number,year=year,address=address,phone=phone,operational_area=operational_area)
+        ngo_user = Ngo(user=user,logo=logo,registration_number=registration_number,year=year,address=address,phone=phone,operational_area=operational_area,description=desc)
         ngo_user.save()
-        login(request,ngo_user)
+        login(request,user)
         return redirect('ngo_home')
     else:
         return render(request,"register_ngo.html",{})
@@ -38,7 +40,7 @@ def login_ngo(request):
         user = User.objects.get(username=username)
         if user:
            login(request,user)
-           return redirect('ngo_home')
+           return redirect('ngo_profile')
         
     return render(request,'ngo_login.html',{})
 
@@ -53,9 +55,7 @@ def ngo_profile(request):
         ngo_profile = Ngo.objects.get(user=request.user)
         return render(request,'ngo_profile.html',{'ngo':ngo_profile})
 
-def detailed_view(request,id):
-    posts = post.objects.get(id=id)
-    return render(request,"detailed_view.html",{'posts':posts})
+
 
 def rescue_animal(request,key):
     ani_post = get_object_or_404(post,id=key)

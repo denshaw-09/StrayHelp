@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StrayHelp</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-success" href="#">StrayHelp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url "home" %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url "about" %}">About</a></li>
+      </ul>
+      <div>
+        <a href="{% url "login_user" %}" class="btn btn-outline-success me-2">Sign in</a>
+        <a href="{% url "register" %}" class="btn btn-success">Sign up</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mission, What We Do, Impact -->
+<section class="py-5">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-12 text-center">
+        <div class="card shadow-sm p-4 mb-4">
+          <i class="fa-solid fa-paw fa-2x text-primary mb-3"></i>
+          <h4 class="fw-bold">Our Mission</h4>
+          <p>To create a compassionate network that bridges the gap between stray animals in need and the people who want to help them, making rescue and care more accessible than ever before.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-12 text-center">
+        <div class="card shadow-sm p-4 mb-4">
+          <i class="fa-solid fa-heart fa-2x text-primary mb-3"></i>
+          <h4 class="fw-bold">What We Do</h4>
+          <p>We provide a platform where individuals can easily report stray animals in need, and NGOs can quickly respond and coordinate rescue efforts. Together, we're creating a more efficient and effective rescue system.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-12 text-center">
+        <div class="card shadow-sm p-4 mb-4">
+          <i class="fa-solid fa-hand-holding-heart fa-2x text-primary mb-3"></i>
+          <h4 class="fw-bold">Our Impact</h4>
+          <p>Since our inception, we've helped connect hundreds of stray animals with caring NGOs and forever homes. Every rescue story represents a life transformed and a community made better.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Join Our Mission -->
+<section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h3 class="fw-bold">Join Our Mission</h3>
+    <p class="mb-0">Whether you're an individual who wants to help stray animals or an NGO looking to make a bigger impact, StrayHelp provides the platform and tools you need. Together, we can create a world where no stray animal is left behind.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-success text-white pt-5 pb-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h6 class="fw-bold">About StrayHelp</h6>
+        <p>Connecting stray animals with caring NGOs and individuals to provide them with a better life.</p>
+      </div>
+      <div class="col-md-3">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+          <li><a href="#" class="text-white text-decoration-none">About Us</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Rescues</a></li>
+          <li><a href="#" class="text-white text-decoration-none">NGOs</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="fw-bold">Help</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+          <li><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="fw-bold">Connect With Us</h6>
+        <a href="#" class="text-white me-2"><i class="fab fa-facebook fa-lg"></i></a>
+        <a href="#" class="text-white me-2"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <p class="mb-0">© 2025 StrayHelp. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

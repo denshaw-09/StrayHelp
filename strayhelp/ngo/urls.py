@@ -7,7 +7,6 @@ urlpatterns = [
    path("logout_ngo/",views.logout_ngo,name="logout_ngo"),
    path('ngo_profile/',views.ngo_profile,name="ngo_profile"),
    path('ngo_home/',views.ngo_home,name="ngo_home"),
-   path('detailed_view/<int:id>/',views.detailed_view,name="detailed_view"),
    path('rescue_animal/<int:key>/',views.rescue_animal,name="rescue_animal"),
    path('dashboard/',views.dashboard,name="dashboard")
 ]
